@@ -22,33 +22,56 @@ public class SampleController {
 	@Autowired
     QueueService service;
 	
+	Map<String,CustomQueue>  queuesMap = new HashMap<String,CustomQueue>();
+	
 	@RequestMapping("/hello")
 	public @ResponseBody String message() {
 		return "hello";
 	}
 	
-	@RequestMapping("/addQueue")
-	public @ResponseBody String addQueue(   ) {
+	@RequestMapping("/addQueue", method = RequestMethod.POST)
+	public @ResponseBody String addQueue( @RequestParam("qName") String qName ) {
+		String message=null;
+		int queuesMapSize = queuesMap.size(); 
+		if(queuesMapSize.size() == 5){
+            message = "No more Queues can be added";
+		} else{
+			CustomQueue customQueue = new CustomQueue();
+            queuesMap.push(queuesMapSize+1, customQueue);
+			message = "Queue added successfully";
+		}
 		
-		return "hello";
+		return message;
 	}
-	@GetMapping
-    public ResponseEntity<List<CustomQueue>> getAllEmployees() {
-        List<CustomQueue> list = service.getAllQueues();
- 
-        return new ResponseEntity<List<CustomQueue>>(list, new HttpHeaders(), HttpStatus.OK);
-    }
-	@RequestMapping("/updateQueue")
-	public @ResponseBody String addQueue(@RequestParam  Integer qid ) {
+	@RequestMapping("/listQueues")
+	public @ResponseBody String listQueues( ) {
 		
-		return "hello";
+		return queuesMap;
 	}
 	@RequestMapping("/deleteQueue")
-	public @ResponseBody String deleteQueue() {
-		return "hello";
+	public @ResponseBody String deleteQueue(@RequestParam("qName") String qName) {
+		
+		String message=null;
+		int queuesMapSize = queuesMap.size(); 
+		if(queuesMapSize.size() == 0){
+            message = "No Queue available to delete";
+		} else{
+           String removedItem = queuesMap.remove(qName);
+		   if(removedItem == null){
+             message = "Queue not found";
+		   }else
+			message = "Queue deleted successfully";
+		}
+		
+		return message;
 	}
+
+
+
 	@RequestMapping("/addMessage")
-	public @ResponseBody String addMessage() {
+	public @ResponseBody String addMessage()@RequestParam("me") String qName {
+		
+		
 		return "hello";
 	}
 	@RequestMapping("/updateMessage")
