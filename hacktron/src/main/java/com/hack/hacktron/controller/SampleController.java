@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hack.hacktron.services.QueeService;
+import com.hack.hacktron.services.QueueService;
 import com.hack.hacktron.vo.CustomQueue;
 
 @RestController
@@ -20,31 +20,31 @@ import com.hack.hacktron.vo.CustomQueue;
 public class SampleController {
 
 	@Autowired
-    QueeService service;
+    QueueService service;
 	
 	@RequestMapping("/hello")
 	public @ResponseBody String message() {
 		return "hello";
 	}
 	
-	@RequestMapping("/addQuee")
-	public @ResponseBody String addQuee(   ) {
+	@RequestMapping("/addQueue")
+	public @ResponseBody String addQueue(   ) {
 		
 		return "hello";
 	}
 	@GetMapping
     public ResponseEntity<List<CustomQueue>> getAllEmployees() {
-        List<CustomQueue> list = service.getAllQuees();
+        List<CustomQueue> list = service.getAllQueues();
  
         return new ResponseEntity<List<CustomQueue>>(list, new HttpHeaders(), HttpStatus.OK);
     }
-	@RequestMapping("/updateQuee")
-	public @ResponseBody String addQuee(@RequestParam  Integer qid ) {
+	@RequestMapping("/updateQueue")
+	public @ResponseBody String addQueue(@RequestParam  Integer qid ) {
 		
 		return "hello";
 	}
-	@RequestMapping("/deleteQuee")
-	public @ResponseBody String deleteQuee() {
+	@RequestMapping("/deleteQueue")
+	public @ResponseBody String deleteQueue() {
 		return "hello";
 	}
 	@RequestMapping("/addMessage")

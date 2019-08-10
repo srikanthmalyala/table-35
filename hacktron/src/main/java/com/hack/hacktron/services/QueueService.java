@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import com.hack.hacktron.vo.CustomQueue;
 
 @Service
-public interface QueeService {
+public interface QueueService {
 
-	List<CustomQueue> getAllQuees();
+	List<CustomQueue> getAllQueues();
 
 }
